@@ -1,0 +1,21 @@
+{
+  "name": "etherscan-balance-snapshot",
+  "version": "1.0.0",
+  "description": "provide an array of addresses and call the etherscan api to get their balance at a specific block height",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test-singleETH": "node test/getSingleEthBalance.js",
+    "test-multipleETH": "node test/getMultiEthBalance.js"
+  },
+  "keywords": [
+    "etherscan"
+  ],
+  "author": "PowVT",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "ethers": "^5.5.3",
+    "node-fetch": "^3.1.0"
+  }
+}
