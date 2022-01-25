@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test-singleETH": "node test/getSingleEthBalance.js",
-    "test-multipleETH": "node test/getMultiEthBalance.js"
+    "test-multipleETH": "node test/getMultiEthBalance.js",
+    "test-multipleERC20Bals": "node test/getMultipleERC20Bals.js"
   },
   "keywords": [
     "etherscan"
