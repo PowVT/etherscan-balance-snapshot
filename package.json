@@ -7,6 +7,7 @@
   "scripts": {
     "test-singleETH": "node test/getSingleEthBalance.js",
     "test-multipleETH": "node test/getMultiEthBalance.js",
+    "test-singleERC20": "node test/getSingleERC20Balance",
     "test-multipleERC20Bals": "node test/getMultipleERC20Bals.js"
   },
   "keywords": [

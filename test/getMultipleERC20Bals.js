@@ -10,7 +10,7 @@ var filePath = fs.createWriteStream('balances.csv');
 // initiate array
 const data = []
 // start reading from address spreadsheet and push all 
-fs.createReadStream("../etherscan-balance-snapshot/EMAX_balances_priorR7/eMax.csv",
+fs.createReadStream("../etherscan-balance-snapshot/EMAX_balances_priorR7/emax.csv",
     {
         flag: 'r',
     })
@@ -21,10 +21,11 @@ fs.createReadStream("../etherscan-balance-snapshot/EMAX_balances_priorR7/eMax.cs
     })
     .on('end', async () => {
         const body = { a: 1 };
-        const blockNumStart = "13845238";
+        const blockNumStart = "13845237"; // before event
+        const blockNumEnd = "13851680"; // after event
 
-        for (let i = 1; i <= 117638; i++) {
-            //console.log(data[i]);
+        for (let i = 1; i <= 118000; i++) {
+           try {
             const response = await fetch(
                 'https://api.etherscan.io/api?' +
                 'module=account' +
@@ -42,18 +43,18 @@ fs.createReadStream("../etherscan-balance-snapshot/EMAX_balances_priorR7/eMax.cs
             // using the fetch above for a specific address, record the results
             const data1 = await response.json();
             console.log('Entry ' + i + ' at block, ' + blockNumStart, data[i][0], data1.result / (10 ** 18));
-
-            //console.log(data[i])
-            const buffer = Buffer.from(data[i][1]);
-            //console.log("Buffer", buffer)
-            filePath.write(buffer + ',\n')
+            // const buffer = Buffer.from(data1.result);
+            // console.log("Buffer", buffer)
+            // filePath.write(buffer + ',\n')
+            filePath.write(data1.result / (10 ** 18) + '\n')
 
             // allow API cooldown
-            await sleep(300)
+            await sleep(305)
+           } catch (err) {
+               console.error(err)
+               filePath.write(0 + '\n')
+           }
         }
-    })
-    .on('error', function (err) {
-        console.error(err)
     })
 
 
